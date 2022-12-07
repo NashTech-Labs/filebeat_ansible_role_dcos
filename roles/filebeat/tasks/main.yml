@@ -1,0 +1,13 @@
+---
+
+- name: Creating a dcos log directory
+  file:
+    path: "{{ item }}"
+    state: directory
+  with_items:
+    - /var/log/dcos/
+  when: "'master' in group_names"
+
+- import_tasks: master.yml
+  when: "'master' in group_names"
+  tags: services_master
